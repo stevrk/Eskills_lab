@@ -30,7 +30,7 @@ WORKDIR /var/www/html
 # Copy existing application directory contents
 COPY . /var/www/html
 
-# Install PHP dependencies (no dev dependencies for production)
+# Install PHP dependencies
 RUN composer install --no-dev --optimize-autoloader
 
 # Create required directories
@@ -40,18 +40,33 @@ RUN mkdir -p /var/www/html/storage/framework/cache \
     /var/www/html/bootstrap/cache \
     /var/www/html/database
 
-# Create SQLite database file (even though we don't use DB, it's required for Laravel)
+# Create SQLite database file
 RUN touch /var/www/html/database/database.sqlite
+
+# Create .env file
+RUN echo "APP_NAME=SJOGU E-Skills Lab" > /var/www/html/.env && \
+    echo "APP_ENV=production" >> /var/www/html/.env && \
+    echo "APP_DEBUG=false" >> /var/www/html/.env && \
+    echo "APP_KEY=base64:4fJX3qY8rK9mV2nP7sB5dH1wL6cR8tX0zM4aB9cD2eF3=" >> /var/www/html/.env && \
+    echo "APP_URL=https://eskills-lab.onrender.com" >> /var/www/html/.env && \
+    echo "LOG_CHANNEL=stack" >> /var/www/html/.env && \
+    echo "DB_CONNECTION=sqlite" >> /var/www/html/.env && \
+    echo "DB_DATABASE=/var/www/html/database/database.sqlite" >> /var/www/html/.env && \
+    echo "SESSION_DRIVER=database" >> /var/www/html/.env && \
+    echo "SESSION_CONNECTION=sqlite" >> /var/www/html/.env
+
+# Create sessions table and run migrations (FIX HERE)
+RUN php artisan migrate --force
 
 # Set permissions
 RUN chown -R www-data:www-data /var/www/html
-RUN chmod -R 755 /var/www/html/storage
-RUN chmod -R 755 /var/www/html/bootstrap/cache
-RUN chmod -R 755 /var/www/html/database
+RUN chmod -R 777 /var/www/html/storage
+RUN chmod -R 777 /var/www/html/bootstrap/cache
+RUN chmod -R 777 /var/www/html/database
 RUN chmod -R 755 /var/www/html/public
 RUN chmod 755 /var/www/html/public/index.php
 
-# Configure Apache to listen on port 10000 (Render's required port)
+# Configure Apache to listen on port 10000
 RUN sed -i 's/Listen 80/Listen 10000/g' /etc/apache2/ports.conf
 RUN sed -i 's/:80/:10000/g' /etc/apache2/sites-available/000-default.conf || true
 
