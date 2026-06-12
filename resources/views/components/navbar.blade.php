@@ -7,7 +7,6 @@
                 </svg>
             </button>
             
-            <!-- Mobile Logo -->
             <div class="flex md:hidden items-center space-x-2">
                 <img src="{{ asset('images/logo.png') }}" alt="SJOGU" class="h-8 w-auto object-contain">
                 <span class="font-bold text-gray-800 text-sm">SJOGU E-Skills</span>
@@ -36,7 +35,7 @@
                     </div>
                     <div class="hidden md:block">
                         <p class="text-sm font-medium text-gray-800">John Phiri</p>
-                        <p class="text-xs text-gray-500">Nursing Student</p>
+                        <p class="text-xs text-gray-500">Year 3 Nursing</p>
                     </div>
                 </div>
             </div>

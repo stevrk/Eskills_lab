@@ -8,7 +8,6 @@
         <div class="grid md:grid-cols-2 gap-8 bg-white rounded-2xl shadow-2xl overflow-hidden">
             <div class="p-8 md:p-12">
                 <div class="text-center mb-8">
-                    <!-- Logo Image -->
                     <div class="flex justify-center mb-4">
                         <img src="{{ asset('images/logo.png') }}" alt="SJOGU Logo" class="h-20 w-auto object-contain">
                     </div>
@@ -43,7 +42,6 @@
             <div class="hidden md:block bg-gradient-to-br from-red-600 to-red-800 p-8 text-white">
                 <div class="h-full flex flex-col justify-center">
                     <div class="mb-8">
-                        <!-- Small logo in the right panel -->
                         <img src="{{ asset('images/logo.png') }}" alt="SJOGU Logo" class="h-16 w-auto object-contain mb-6 opacity-80">
                         <h3 class="text-2xl font-bold mb-4">Clinical Skills Library</h3>
                         <p class="text-red-100 mb-6">Access 100+ clinical procedures, video tutorials, and evidence-based guidelines curated by experienced nursing educators.</p>

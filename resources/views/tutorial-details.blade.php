@@ -215,7 +215,7 @@
         </div>
     </div>
     
-    <div class="mt-8">
+    <!--<div class="mt-8">
         <h2 class="text-xl font-bold text-gray-800 mb-4">Related Tutorials</h2>
         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             @php
@@ -238,6 +238,6 @@
             </a>
             @endforeach
         </div>
-    </div>
+    </div>-->
 </div>
 @endsection

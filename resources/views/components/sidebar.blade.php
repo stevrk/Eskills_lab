@@ -2,7 +2,6 @@
     <div class="flex flex-col h-full">
         <div class="p-6 border-b border-gray-200">
             <div class="flex items-center space-x-3">
-                <!-- Logo Image -->
                 <img src="{{ asset('images/logo.png') }}" alt="SJOGU Logo" class="w-10 h-10 object-contain">
                 <div>
                     <h1 class="text-lg font-bold text-gray-800">SJOGU</h1>
@@ -31,11 +30,18 @@
                 <span class="text-sm font-medium">Dashboard</span>
             </a>
             
-            <a href="{{ url('/tutorials') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 {{ request()->is('tutorials*') ? 'bg-red-50 text-red-600' : '' }}">
+            <a href="{{ url('/tutorials') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 {{ request()->is('tutorials') && !request()->is('tutorials/review') ? 'bg-red-50 text-red-600' : '' }}">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
                 </svg>
-                <span class="text-sm font-medium">Video Tutorials</span>
+                <span class="text-sm font-medium">Current Semester</span>
+            </a>
+            
+            <a href="{{ url('/tutorials/review') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 {{ request()->is('tutorials/review') ? 'bg-red-50 text-red-600' : '' }}">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                </svg>
+                <span class="text-sm font-medium">Learning Archive</span>
             </a>
             
             <a href="{{ url('/documents') }}" class="flex items-center space-x-3 px-4 py-3 rounded-lg text-gray-700 hover:bg-red-50 hover:text-red-600 transition-all duration-200 {{ request()->is('documents') ? 'bg-red-50 text-red-600' : '' }}">

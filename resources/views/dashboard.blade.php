@@ -4,27 +4,29 @@
 
 @section('content')
 <div class="fade-in">
+    <!-- Welcome Section -->
     <div class="mb-8">
         <h1 class="text-2xl md:text-3xl font-bold text-gray-800 mb-2">Welcome Back, John Phiri</h1>
-        <p class="text-gray-600">Continue building your clinical competence through practical learning resources.</p>
+        <p class="text-gray-600">Track your learning progress and continue building clinical competence.</p>
     </div>
-    
+
+    <!-- Quick Stats Cards -->
     <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
         @php
             $stats = [
-                ['label' => 'Procedures', 'value' => '24', 'color' => 'red', 'icon' => 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2'],
-                ['label' => 'Video Tutorials', 'value' => '18', 'color' => 'blue', 'icon' => 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'],
-                ['label' => 'PDF Documents', 'value' => '32', 'color' => 'green', 'icon' => 'M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z'],
-                ['label' => 'Clinical Guidelines', 'value' => '12', 'color' => 'purple', 'icon' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z']
+                ['label' => 'Tutorials Watched', 'value' => '18', 'total' => '34', 'color' => 'red', 'icon' => 'M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z'],
+                ['label' => 'Documents Downloaded', 'value' => '12', 'total' => '24', 'color' => 'blue', 'icon' => 'M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4'],
+                ['label' => 'Guidelines Read', 'value' => '8', 'total' => '12', 'color' => 'green', 'icon' => 'M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'],
+                ['label' => 'Learning Hours', 'value' => '42', 'total' => '80', 'color' => 'purple', 'icon' => 'M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z'],
             ];
         @endphp
         
         @foreach($stats as $stat)
         <div class="bg-white rounded-xl p-6 shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
-            <div class="flex items-center justify-between">
+            <div class="flex items-center justify-between mb-3">
                 <div>
                     <p class="text-gray-500 text-sm">{{ $stat['label'] }}</p>
-                    <p class="text-2xl font-bold text-gray-800">{{ $stat['value'] }}</p>
+                    <p class="text-2xl font-bold text-gray-800">{{ $stat['value'] }} <span class="text-sm text-gray-400">/ {{ $stat['total'] }}</span></p>
                 </div>
                 <div class="w-10 h-10 bg-{{ $stat['color'] }}-100 rounded-lg flex items-center justify-center">
                     <svg class="w-6 h-6 text-{{ $stat['color'] }}-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -32,95 +34,155 @@
                     </svg>
                 </div>
             </div>
+            <!-- Progress Bar -->
+            <div class="w-full bg-gray-200 rounded-full h-2">
+                <div class="bg-{{ $stat['color'] }}-600 h-2 rounded-full" style="width: {{ ($stat['value'] / $stat['total']) * 100 }}%"></div>
+            </div>
         </div>
         @endforeach
     </div>
-    
-    <div class="mb-8">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-gray-800">Year 3 Nursing & Midwifery Procedures</h2>
-            <a href="{{ url('/tutorials') }}" class="text-red-600 hover:text-red-700 text-sm font-medium">View all →</a>
+
+    <!-- Overall Progress Section -->
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 mb-8">
+        <div class="flex justify-between items-start mb-4">
+            <div>
+                <h2 class="text-xl font-bold text-gray-800">Your Learning Progress</h2>
+                <p class="text-gray-600 text-sm">Track your engagement with clinical skills content</p>
+            </div>
+            <div class="text-right">
+                <span class="text-3xl font-bold text-red-600">53%</span>
+                <p class="text-xs text-gray-500">Overall Progress</p>
+            </div>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Overall Progress Bar -->
+        <div class="w-full bg-gray-200 rounded-full h-4 mb-6">
+            <div class="bg-gradient-to-r from-red-500 to-red-600 h-4 rounded-full transition-all duration-500" style="width: 53%"></div>
+        </div>
+        
+        <!-- Category Progress -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
             @php
-                $procedures = [
-                    ['id' => 1, 'title' => 'Intravenous Cannulation', 'lecturer' => 'Dr. Sarah Mwale', 'duration' => '12:34', 'url' => 'sndbXQN7M98'],
-                    ['id' => 3, 'title' => 'Wound Dressing and Aseptic Technique', 'lecturer' => 'Dr. Mary Phiri', 'duration' => '18:45', 'url' => 'VDngeM2NzPA'],
-                    ['id' => 4, 'title' => 'Female Urinary Catheterization', 'lecturer' => 'Prof. Peter Zulu', 'duration' => '14:30', 'url' => 'sUTVOx2yn3A'],
-                    ['id' => 19, 'title' => 'Safe Medication Administration', 'lecturer' => 'Dr. Mary Phiri', 'duration' => '14:20', 'url' => '90F2ew68K9g'],
-                    ['id' => 9, 'title' => 'Blood Pressure Measurement', 'lecturer' => 'Dr. Grace Moyo', 'duration' => '09:45', 'url' => 'soR8THwQzBw'],
-                    ['id' => 20, 'title' => 'Infection Prevention and Control', 'lecturer' => 'Prof. Peter Zulu', 'duration' => '12:30', 'url' => 'jx9sRYmBW3Q'],
+                $categories = [
+                    ['name' => 'Clinical Procedures', 'progress' => 65, 'color' => 'red', 'watched' => '13/20'],
+                    ['name' => 'Vital Signs & Assessment', 'progress' => 75, 'color' => 'blue', 'watched' => '6/8'],
+                    ['name' => 'Maternal & Child Health', 'progress' => 40, 'color' => 'green', 'watched' => '2/5'],
+                    ['name' => 'Medication & Safety', 'progress' => 50, 'color' => 'yellow', 'watched' => '4/8'],
+                    ['name' => 'Emergency Care', 'progress' => 60, 'color' => 'purple', 'watched' => '3/5'],
+                    ['name' => 'Documentation', 'progress' => 30, 'color' => 'indigo', 'watched' => '1/3'],
                 ];
             @endphp
             
-            @foreach($procedures as $procedure)
+            @foreach($categories as $category)
+            <div class="bg-gray-50 rounded-lg p-3">
+                <div class="flex justify-between mb-2">
+                    <span class="text-sm font-medium text-gray-700">{{ $category['name'] }}</span>
+                    <span class="text-xs text-gray-500">{{ $category['watched'] }}</span>
+                </div>
+                <div class="w-full bg-gray-200 rounded-full h-2">
+                    <div class="bg-{{ $category['color'] }}-500 h-2 rounded-full" style="width: {{ $category['progress'] }}%"></div>
+                </div>
+                <p class="text-xs text-gray-500 mt-1">{{ $category['progress'] }}% complete</p>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
+    <!-- Recently Watched Tutorials -->
+    <div class="mb-8">
+        <div class="flex justify-between items-center mb-4">
+            <h2 class="text-xl font-bold text-gray-800">Continue Learning</h2>
+            <a href="{{ url('/tutorials') }}" class="text-red-600 hover:text-red-700 text-sm font-medium">View all tutorials →</a>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            @php
+                $recentWatched = [
+                    ['id' => 1, 'title' => 'Intravenous Cannulation Procedure', 'watched_at' => '2 hours ago', 'progress' => 100, 'url' => 'sndbXQN7M98', 'duration' => '12:34'],
+                    ['id' => 4, 'title' => 'Female Urinary Catheterization', 'watched_at' => 'Yesterday', 'progress' => 85, 'url' => 'sUTVOx2yn3A', 'duration' => '14:30'],
+                    ['id' => 20, 'title' => 'Infection Prevention and Control', 'watched_at' => '2 days ago', 'progress' => 60, 'url' => 'jx9sRYmBW3Q', 'duration' => '12:30'],
+                ];
+            @endphp
+            
+            @foreach($recentWatched as $tutorial)
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover">
                 <div class="relative">
-                    <img src="https://img.youtube.com/vi/{{ $procedure['url'] }}/mqdefault.jpg" 
-                         alt="{{ $procedure['title'] }}"
-                         class="w-full h-48 object-cover">
-                    
-                    <!-- Play button overlay -->
-                    <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                        <div class="w-16 h-16 bg-red-600 rounded-full flex items-center justify-center transform hover:scale-110 transition-transform">
-                            <svg class="w-8 h-8 text-white ml-1" fill="currentColor" viewBox="0 0 24 24">
-                                <path d="M8 5v14l11-7z"/>
-                            </svg>
-                        </div>
-                    </div>
-                    
-                    <!-- Duration badge -->
+                    <img src="https://img.youtube.com/vi/{{ $tutorial['url'] }}/mqdefault.jpg" 
+                         alt="{{ $tutorial['title'] }}"
+                         class="w-full h-36 object-cover">
                     <div class="absolute bottom-2 right-2 bg-black bg-opacity-75 text-white text-xs px-2 py-1 rounded">
-                        {{ $procedure['duration'] }}
+                        {{ $tutorial['duration'] }}
                     </div>
                 </div>
                 <div class="p-4">
-                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">{{ $procedure['title'] }}</h3>
-                    <p class="text-sm text-gray-600 mb-3">👨‍🏫 {{ $procedure['lecturer'] }}</p>
-                    <a href="{{ url('/tutorial/'.$procedure['id']) }}" class="inline-block w-full text-center bg-red-600 hover:bg-red-700 text-white font-medium py-2 rounded-lg transition-colors">
-                        Watch Tutorial
-                    </a>
+                    <h3 class="font-semibold text-gray-800 mb-2 line-clamp-2">{{ $tutorial['title'] }}</h3>
+                    <p class="text-xs text-gray-500 mb-2">Last watched: {{ $tutorial['watched_at'] }}</p>
+                    
+                    <!-- Watch Progress -->
+                    <div class="mb-3">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span class="text-gray-600">Progress</span>
+                            <span class="text-gray-600">{{ $tutorial['progress'] }}%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-1.5">
+                            <div class="bg-red-600 h-1.5 rounded-full" style="width: {{ $tutorial['progress'] }}%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="flex space-x-2">
+                        <a href="{{ url('/tutorial/'.$tutorial['id']) }}" class="flex-1 text-center bg-red-600 hover:bg-red-700 text-white text-sm font-medium py-1.5 rounded-lg transition-colors">
+                            Continue Watching
+                        </a>
+                        <button class="px-3 py-1.5 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                            <svg class="w-4 h-4 text-gray-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"></path>
+                            </svg>
+                        </button>
+                    </div>
                 </div>
             </div>
             @endforeach
         </div>
     </div>
-    
-    <!-- Recently Added Section -->
+
+    <!-- Recently Downloaded Documents -->
     <div class="mb-8">
         <div class="flex justify-between items-center mb-4">
-            <h2 class="text-xl font-bold text-gray-800">Recently Added Tutorials</h2>
-            <a href="{{ url('/tutorials') }}" class="text-red-600 hover:text-red-700 text-sm font-medium">Browse all →</a>
+            <h2 class="text-xl font-bold text-gray-800">Recent Downloads</h2>
+            <a href="{{ url('/documents') }}" class="text-red-600 hover:text-red-700 text-sm font-medium">View all documents →</a>
         </div>
         
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             @php
-                $recentTutorials = [
-                    ['id' => 2, 'title' => 'Basic Life Support (BLS) and CPR', 'lecturer' => 'Prof. James Banda', 'duration' => '15:20', 'url' => 'n7kqiAu2gC8'],
-                    ['id' => 13, 'title' => 'Antenatal Assessment', 'lecturer' => 'Dr. Sarah Mwale', 'duration' => '19:30', 'url' => '-pkkgBX7OFQ'],
-                    ['id' => 14, 'title' => 'Newborn Baby Examination', 'lecturer' => 'Prof. James Banda', 'duration' => '17:45', 'url' => '4fszEL_wpD0'],
-                    ['id' => 21, 'title' => 'Hand Hygiene and PPE Donning/Doffing', 'lecturer' => 'Dr. Grace Moyo', 'duration' => '11:45', 'url' => 'iwvnA_b9Q8Y'],
+                $recentDownloads = [
+                    ['title' => 'Nursing Procedure Manual', 'description' => 'Complete guide to essential nursing procedures', 'size' => '4.2 MB', 'downloaded_at' => '2 days ago', 'icon' => '📘'],
+                    ['title' => 'Infection Prevention Guide', 'description' => 'Standard precautions and infection control', 'size' => '2.1 MB', 'downloaded_at' => '5 days ago', 'icon' => '📙'],
+                    ['title' => 'Clinical Skills Checklist', 'description' => 'Competency assessment for nursing students', 'size' => '1.8 MB', 'downloaded_at' => '1 week ago', 'icon' => '📗'],
+                    ['title' => 'Emergency Care Protocols', 'description' => 'Quick reference for emergency situations', 'size' => '2.9 MB', 'downloaded_at' => '1 week ago', 'icon' => '📔'],
                 ];
             @endphp
             
-            @foreach($recentTutorials as $tutorial)
-            <a href="{{ url('/tutorial/'.$tutorial['id']) }}" class="block">
-                <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden card-hover">
-                    <div class="relative">
-                        <img src="https://img.youtube.com/vi/{{ $tutorial['url'] }}/mqdefault.jpg" 
-                             alt="{{ $tutorial['title'] }}"
-                             class="w-full h-32 object-cover">
-                        <div class="absolute bottom-1 right-1 bg-black bg-opacity-75 text-white text-xs px-1 py-0.5 rounded">
-                            {{ $tutorial['duration'] }}
+            @foreach($recentDownloads as $doc)
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4 card-hover">
+                <div class="flex items-start space-x-3">
+                    <div class="text-4xl">{{ $doc['icon'] }}</div>
+                    <div class="flex-1">
+                        <h3 class="font-semibold text-gray-800">{{ $doc['title'] }}</h3>
+                        <p class="text-xs text-gray-500 mt-1">{{ $doc['description'] }}</p>
+                        <div class="flex items-center justify-between mt-2">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs text-gray-400">{{ $doc['size'] }}</span>
+                                <span class="text-xs text-gray-400">Downloaded: {{ $doc['downloaded_at'] }}</span>
+                            </div>
+                            <button class="text-red-600 hover:text-red-700">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                </svg>
+                            </button>
                         </div>
                     </div>
-                    <div class="p-3">
-                        <h3 class="font-semibold text-gray-800 text-sm line-clamp-2 mb-1">{{ $tutorial['title'] }}</h3>
-                        <p class="text-xs text-gray-500">{{ $tutorial['lecturer'] }}</p>
-                    </div>
                 </div>
-            </a>
+            </div>
             @endforeach
         </div>
     </div>

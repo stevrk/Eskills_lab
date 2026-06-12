@@ -11,9 +11,6 @@
         * {
             font-family: 'Inter', sans-serif;
         }
-        .sidebar-transition {
-            transition: transform 0.3s ease-in-out;
-        }
         .card-hover {
             transition: all 0.3s ease;
         }
